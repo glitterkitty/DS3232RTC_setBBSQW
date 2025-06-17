@@ -8,8 +8,6 @@
 
 #include <DS3232RTC.h>
 
-uint8_t DS3232RTC::errCode;
-
 // Initialize the I2C bus.
 void DS3232RTC::begin()
 {
