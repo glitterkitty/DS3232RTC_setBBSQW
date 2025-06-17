@@ -233,6 +233,15 @@ void DS3232RTC::squareWave(SQWAVE_FREQS_t freq)
     writeRTC(DS32_CONTROL, controlReg);
 }
 
+// Enable or disable the 32kHz output.
+void DS3232RTC::enable32kHz(bool enable)
+{
+    uint8_t statusReg = readRTC(DS32_STATUS);   // read the status register
+    if (enable) statusReg |= _BV(DS32_EN32KHZ);
+    else statusReg &= ~_BV(DS32_EN32KHZ);
+    writeRTC(DS32_STATUS, statusReg);
+}
+
 // Returns the value of the oscillator stop flag (OSF) bit in the
 // control/status register which indicates that the oscillator is or
 // was stopped, and that the timekeeping data may be invalid.
