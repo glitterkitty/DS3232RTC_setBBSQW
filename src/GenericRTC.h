@@ -4,7 +4,7 @@
 // Copyright (C) 2025 by Jack Christensen and licensed under
 // GNU GPL v3.0, https://www.gnu.org/licenses/gpl.html
 //
-// Allows a sketch to work with either type of RTC, determined at run time.
+// Allows a sketch to work with either type of RTC, can be determined at run time.
 
 #ifndef GENERIC_RTC_H_INCLUDED
 #define GENERIC_RTC_H_INCLUDED
