@@ -28,7 +28,7 @@ time_t DS3232RTC::get()
 // Set the RTC to the given time_t value and clear the
 // oscillator stop flag (OSF) in the Control/Status register.
 // Returns the I2C status (zero if successful).
-uint8_t DS3232RTC::set(time_t t)
+uint8_t DS3232RTC::set(const time_t t)
 {
     tmElements_t tm;
 
@@ -80,7 +80,7 @@ uint8_t DS3232RTC::write(tmElements_t &tm)
 // Number of bytes (nBytes) must be between 1 and 31 (Wire library
 // limitation).
 // Returns the I2C status (zero if successful).
-uint8_t DS3232RTC::writeRTC(uint8_t addr, uint8_t* values, uint8_t nBytes)
+uint8_t DS3232RTC::writeRTC(const uint8_t addr, const uint8_t* values, const uint8_t nBytes)
 {
     i2cBeginTransmission(DS32_ADDR);
     i2cWrite(addr);
@@ -91,7 +91,7 @@ uint8_t DS3232RTC::writeRTC(uint8_t addr, uint8_t* values, uint8_t nBytes)
 // Write a single byte to RTC RAM.
 // Valid address range is 0x00 - 0xFF, no checking.
 // Returns the I2C status (zero if successful).
-uint8_t DS3232RTC::writeRTC(uint8_t addr, uint8_t value)
+uint8_t DS3232RTC::writeRTC(const uint8_t addr, const uint8_t value)
 {
     return ( writeRTC(addr, &value, 1) );
 }
@@ -101,7 +101,7 @@ uint8_t DS3232RTC::writeRTC(uint8_t addr, uint8_t value)
 // Number of bytes (nBytes) must be between 1 and 32 (Wire library
 // limitation).
 // Returns the I2C status (zero if successful).
-uint8_t DS3232RTC::readRTC(uint8_t addr, uint8_t* values, uint8_t nBytes)
+uint8_t DS3232RTC::readRTC(const uint8_t addr, uint8_t* values, const uint8_t nBytes)
 {
     i2cBeginTransmission(DS32_ADDR);
     i2cWrite(addr);
@@ -113,12 +113,12 @@ uint8_t DS3232RTC::readRTC(uint8_t addr, uint8_t* values, uint8_t nBytes)
 
 // Read a single byte from RTC RAM.
 // Valid address range is 0x00 - 0xFF, no checking.
-uint8_t DS3232RTC::readRTC(uint8_t addr)
+uint8_t DS3232RTC::readRTC(const uint8_t addr)
 {
-    uint8_t b {0};
+    uint8_t value;
 
-    readRTC(addr, &b, 1);
-    return b;
+    readRTC(addr, &value, 1);
+    return value;
 }
 
 // Set an alarm time. Sets the alarm registers only.  To cause the

@@ -11,6 +11,7 @@
 
 #include <Arduino.h>
 #include <TimeLib.h>        // https://github.com/PaulStoffregen/Time
+#include <GenericRTC.h>
 
 // define release-independent I2C functions
 #if defined(__AVR_ATtiny44__) || defined(__AVR_ATtiny84__) || defined(__AVR_ATtiny45__) || defined(__AVR_ATtiny85__)
@@ -47,7 +48,7 @@
 #define BUFFER_LENGTH 32
 #endif
 
-class DS3232RTC
+class DS3232RTC : public GenericRTC
 {
     public:
         // Alarm masks
@@ -131,16 +132,16 @@ class DS3232RTC
             DS32_CENTURY     {7},        // Century bit in Month register
             DS32_DYDT        {6};        // Day/Date flag bit in alarm Day/Date registers
 
-        DS3232RTC(TwoWire& tw=Wire) : wire(tw) {};
+        DS3232RTC(TwoWire& tw=Wire) : GenericRTC{tw} {};
         void begin();
         time_t get();
-        uint8_t set(time_t t);
+        uint8_t set(const time_t t);
         uint8_t read(tmElements_t &tm);
         uint8_t write(tmElements_t &tm);
-        uint8_t writeRTC(uint8_t addr, uint8_t* values, uint8_t nBytes);
-        uint8_t writeRTC(uint8_t addr, uint8_t value);
-        uint8_t readRTC(uint8_t addr, uint8_t* values, uint8_t nBytes);
-        uint8_t readRTC(uint8_t addr);
+        uint8_t writeRTC(const uint8_t addr, const uint8_t* values, const uint8_t nBytes);
+        uint8_t writeRTC(const uint8_t addr, const uint8_t value);
+        uint8_t readRTC(const uint8_t addr, uint8_t* values, const uint8_t nBytes);
+        uint8_t readRTC(const uint8_t addr);
         void setAlarm(ALARM_TYPES_t alarmType, uint8_t seconds, uint8_t minutes, uint8_t hours, uint8_t daydate);
         void setAlarm(ALARM_TYPES_t alarmType, uint8_t minutes, uint8_t hours, uint8_t daydate);
         void alarmInterrupt(ALARM_NBR_t alarmNumber, bool alarmEnabled);
@@ -154,7 +155,7 @@ class DS3232RTC
         uint8_t errCode;
 
     private:
-        TwoWire& wire;      // reference to Wire, Wire1, etc.
+        //TwoWire& wire;      // reference to Wire, Wire1, etc.
         uint8_t dec2bcd(uint8_t n);
         uint8_t bcd2dec(uint8_t n);
 };
