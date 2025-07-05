@@ -24,6 +24,7 @@ class GenericRTC
         virtual uint8_t writeRTC(const uint8_t addr, const uint8_t value) = 0;
         virtual uint8_t readRTC(const uint8_t addr, uint8_t* values, const uint8_t nBytes) = 0;
         virtual uint8_t readRTC(const uint8_t addr) = 0;
+        virtual int16_t temperature() {return 0;};
 
     protected:
         TwoWire& wire;      // reference to Wire, Wire1, etc.
