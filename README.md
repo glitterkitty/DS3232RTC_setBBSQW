@@ -1,6 +1,7 @@
 # Arduino DS3232RTC_setBBSQW Library
-with a minor addition setBBSQW for 'zero-power' arduino. see [wiki](https://github.com/glitterkitty/DS3232RTC_setBBSQW/wiki)
+a fork with a minor addition setBBSQW for 'zero-power' arduino. see [wiki](https://github.com/glitterkitty/DS3232RTC_setBBSQW/wiki)
 
+original README:
 # Arduino DS3232RTC Library
 https://github.com/JChristensen/DS3232RTC  
 README file  
