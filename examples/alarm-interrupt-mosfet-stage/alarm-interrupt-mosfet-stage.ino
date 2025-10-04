@@ -13,6 +13,7 @@ note: with ftdi connected to arduino and PC, current draw from
       cr2032 may be ~90 or higher... current measurements taken 
       with ftdi disconnected from PC
 
+made in 10/2025 by Don M
 */
 
 
